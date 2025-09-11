@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial SNS</title>
+  <script src="/js/home.js"></script>
+  <script type="module" src="/js/home.module.js"></script>
+</head>
+
+<body>
+  <div>
+    <h1>タイムライン</h1>
+    <p id="display_name"></p>
+    <input type="button" value="ログアウト" onclick="logout()" />
+    <div id="timeline">
+      <textarea id="content" cols="40" rows="6" style="resize: none;" required></textarea>
+      <div>
+        <input type="button" value="投稿" onclick="submitContent()" />
+      </div>
+      <hr>
+    </div>
+  </div>
+</body>
+
+</html>

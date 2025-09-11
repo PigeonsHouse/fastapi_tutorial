@@ -1,0 +1,55 @@
+from fastapi import APIRouter, Depends
+from utils import generate_token, get_current_user
+from db import get_db
+import cruds
+from sqlalchemy.orm.session import Session
+from schemas import (
+    ContentPayload,
+    ContentSchema,
+    ReturnToken,
+    SignInPayload,
+    SignUpPayload,
+    UserSchema,
+)
+
+user_router = APIRouter(prefix="/users", tags=["users"])
+content_router = APIRouter(prefix="/contents", tags=["contents"])
+
+
+@user_router.post("/signup", response_model=UserSchema)
+def signup(payload: SignUpPayload, db: Session = Depends(get_db)):
+    user = cruds.add_user(db, payload.email, payload.name, payload.password)
+    return user
+
+
+@user_router.post("/signin", response_model=ReturnToken)
+def signin(payload: SignInPayload, db: Session = Depends(get_db)):
+    user_id = cruds.get_user_id(db, payload.email, payload.password)
+    token = generate_token(user_id)
+    return {"token": token}
+
+
+@user_router.get("/me", response_model=UserSchema)
+def get_my_info(
+    user_id: str = Depends(get_current_user), db: Session = Depends(get_db)
+):
+    user = cruds.get_user_by_id(db, user_id)
+    return user
+
+
+@content_router.get(
+    "", response_model=list[ContentSchema], dependencies=[Depends(get_current_user)]
+)
+def fetch_contents(db: Session = Depends(get_db)):
+    # contentsの配列を取得して，配列をreturnする．
+    return []
+
+
+@content_router.post("", response_model=ContentSchema)
+def post_content(
+    payload: ContentPayload,
+    user_id: str = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    # contentを投稿する関数を呼び出して，投稿した情報をreturnする．
+    return {"id":"dummy","content": "dummy", "user": {"id": "dummy", "name":"dummy","email": "dum@m.y","password_hash":"dummy"}, "created_at": "2020-02-02"}
