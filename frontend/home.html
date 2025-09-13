@@ -4,16 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial SNS</title>
+    <!-- <link rel="stylesheet" href="/css/home.css" type="text/css" /> -->
     <script src="/js/home.js"></script>
     <script type="module" src="/js/home.module.js"></script>
   </head>
 
   <body>
+    <h1>タイムライン</h1>
     <div>
-      <h1>タイムライン</h1>
-      <p id="display_name"></p>
-      <input type="button" value="ログアウト" onclick="logout()" />
-      <div id="timeline">
+      <div>
+        <p id="display_name">
+          <input type="button" value="ログアウト" onclick="logout()" />
+        </p>
         <textarea
           id="content"
           cols="40"
@@ -24,7 +26,9 @@
         <div>
           <input type="button" value="投稿" onclick="submitContent()" />
         </div>
-        <hr />
+      </div>
+      <hr />
+      <div id="timeline">
       </div>
     </div>
   </body>

@@ -1,0 +1,92 @@
+:root {
+    color-scheme: light dark;
+
+    --text: rgb(83, 100, 113);
+    --light-line: rgb(239, 243, 244);
+    --dark-line: rgb(56, 68, 77);
+
+    --black: rgb(15, 20, 25);
+    --dark-blue: rgb(21, 32, 43);
+    --light-blue: rgb(29, 155, 240);
+    --white: rgb(247, 249, 249);
+    --pure-white: rgb(255, 255, 255);
+
+    --black-hover: rgb(39, 44, 48);
+    --white-hover: rgb(215, 219, 220);
+    --light-blue-hover: rgb(26, 140, 216);
+}
+
+body {
+    margin: 0;
+    background-color: light-dark(var(--pure-white), var(--dark-blue));
+    color: light-dark(var(--black), var(--white));
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+body> div {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    border-left: 1px solid light-dark(var(--light-line), var(--dark-line));
+    border-right: 1px solid light-dark(var(--light-line), var(--dark-line));
+    overflow: auto;
+    flex-grow: 1;
+}
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 16px 0;
+    border: 1px solid light-dark(var(--light-line), var(--dark-line));
+}
+div:has(>#display_name) {
+    padding: 8px 12px;
+}
+#display_name {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 16px;
+}
+input[value="ログアウト"] {
+    background-color: unset;
+    color: var(--light-blue);
+    border: none;
+    border-radius: 9999px;
+    padding: 0;
+    margin-left: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 8px;
+    border: 1px solid light-dark(var(--light-line), var(--dark-line));
+    border-radius: 8px;
+    resize: vertical;
+    background-color: light-dark(var(--white), var(--black));
+    color: light-dark(var(--black), var(--white));
+}
+div:has(>input[value="投稿"]) {
+    display: flex;
+    justify-self: flex-end;
+}
+input[value="投稿"] {
+    background-color: light-dark(var(--black), var(--white));
+    color: light-dark(var(--white), var(--black));
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+hr {
+    border-style:solid;
+    border-color: light-dark(var(--light-line), var(--dark-line));
+    background-color: light-dark(var(--light-line), var(--dark-line));
+}
+#timeline>.content {
+    padding: 0 16px;
+}

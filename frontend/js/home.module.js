@@ -22,7 +22,8 @@ if (response.status !== 200) {
 
 // 取得に成功した自身の情報を表示する
 const user = await response.json();
-document.getElementById('display_name').innerHTML = `ユーザー名：${user.name}`;
+const displayName = document.getElementById('display_name');
+displayName.innerHTML = `ユーザー名：${user.name}` + displayName.innerHTML;
 
 // タイムラインに表示する投稿一覧を取得する
 const timeline_response = await fetch('/api/contents', {
@@ -36,7 +37,15 @@ const timeline_response = await fetch('/api/contents', {
 if (timeline_response.status != 200) {
   alert('getting content is failed');
 } else {
-  const timelines = await timeline_response.json();
+  // const timelines = await timeline_response.json();
+
+  const timelines = [
+    {
+      user: {name: 'testuser1'},
+      content: 'これはテスト投稿1です',
+      created_at: '2024-06-01 12:00:00',
+    }
+  ]
 
   timelines.map((content) =>
     document
