@@ -1,0 +1,85 @@
+:root {
+    color-scheme: light dark;
+
+    --light-line: rgb(239, 243, 244);
+    --dark-line: rgb(56, 68, 77);
+
+    --black: rgb(15, 20, 25);
+    --dark-blue: rgb(21, 32, 43);
+    --light-blue: rgb(29, 155, 240);
+    --white: rgb(247, 249, 249);
+    --pure-white: rgb(255, 255, 255);
+
+    --black-hover: rgb(39, 44, 48);
+    --white-hover: rgb(215, 219, 220);
+    --light-blue-hover: rgb(26, 140, 216);
+}
+
+body {
+    background-color: light-dark(var(--pure-white), var(--dark-blue));
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+h1 {
+    color: light-dark(var(--black), var(--white));
+    border-bottom: 1px solid light-dark(var(--light-line), var(--dark-line));
+    text-align: center;
+    margin: 0;
+    padding: 16px 0;
+}
+h1 + div {
+    border-left: 1px solid light-dark(var(--light-line), var(--dark-line));
+    border-right: 1px solid light-dark(var(--light-line), var(--dark-line));
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0 8px;
+    flex-grow: 1;
+}
+p:first-child {
+    color: light-dark(var(--black), var(--white));
+    margin: 0;
+    padding: 16px 0;
+}
+div>div {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding-bottom: 16px;
+    
+    gap: 16px;
+}
+div>a {
+    color: light-dark(var(--white), var(--black));
+    background-color: light-dark(var(--black), var(--white));
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 9999px;
+    font-weight: bold;
+    transition: 0.2s;
+    &:hover {
+        background-color: light-dark(var(--black-hover), var(--white-hover));
+    }
+}
+p:has(a) {
+    margin: 0;
+    padding-top: 16px;
+    text-align: center;
+}
+p>a {
+    background-color: var(--light-blue);
+    color: var(--white);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 9999px;
+    font-weight: bold;
+    &::after {
+        content: " →";
+    }
+    &:hover {
+        background-color: var(--light-blue-hover);
+    }
+}
