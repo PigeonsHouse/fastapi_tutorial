@@ -21,6 +21,7 @@ class UserSchema(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+
 class ReturnToken(BaseModel):
     token: str
 

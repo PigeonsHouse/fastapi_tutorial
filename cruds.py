@@ -1,16 +1,8 @@
-import os
-import bcrypt
 from fastapi import HTTPException
 from sqlalchemy.orm.session import Session
-from schemas import UserSchema
-from db import User
-
-salt = os.environ.get("PASSWORD_HASH_SALT", "$2a$10$ThXfVCPWwXYx69U8vuxSUu").encode()
-
-
-def get_password_hash(password: str) -> str:
-    hash = bcrypt.hashpw(password.encode(), salt)
-    return hash.decode()
+from schemas import UserSchema, ContentSchema
+from db import User, Content
+from utils import get_password_hash
 
 
 def add_user(db: Session, email: str, name: str, password: str) -> UserSchema:
@@ -47,10 +39,16 @@ def get_user_by_id(db: Session, user_id: str) -> UserSchema:
     return user
 
 
-# 作る関数1
-# DBからcontentsのテーブルにある情報全部持ってきて，返す用のschemaにフォーマットして，フォーマットしたものの配列を返す
-# fetch_contents関数で使用したい．
+## 作る関数1
+# fetch_contents関数で使用したい。
+# 1. db.queryでcontentsのテーブルにあるデータを全て取ってくる
+# 2. 取ってきた1つ1つのデータをmodel_validateを使って、APIが返す用のschemaに変換する
+# 3. 変換したデータのリストをreturnする
 
-# 作る関数2
-# Contentの作成に必要な情報を引数に受け取り，DBに追加して，追加した情報を更新した後にフォーマットして返す．
+## 作る関数2
 # post_content関数で使用したい．
+# 1. 引数から、contentsテーブルにcontentを作るために必要なデータを全て受け取る
+#    hint: db.pyの定義がテーブルの定義。defaultのないColumnのデータはcontentを作るために必要になる
+# 2. 引数の値を使い、DBで扱う方のContentのクラスを組み立て、DBにcommit, refreshする
+#    hint: cruds.pyのadd_userで、Userクラスで同じようなことをしているので、参考にしてみよう
+# 3. model_validateでAPIが返す用のschemaに変換し、returnする

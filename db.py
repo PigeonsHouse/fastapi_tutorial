@@ -3,7 +3,7 @@ from sqlalchemy import DateTime, ForeignKey, String, create_engine, Column
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.orm.session import Session
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
-from typing import Any
+from typing import Any, Generator
 from uuid import uuid4
 from sqlalchemy.sql.functions import func
 
@@ -36,7 +36,7 @@ Base.metadata.create_all(bind=engine)
 SessionClass = sessionmaker(engine)
 
 
-def get_db() -> Session:
+def get_db() -> Generator[Session, Any, None]:
     db = SessionClass()
     try:
         yield db
