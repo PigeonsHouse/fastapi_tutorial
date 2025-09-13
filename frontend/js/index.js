@@ -2,5 +2,5 @@
 const token = localStorage.getItem('token');
 // 保存されていたらサインアップの必要がないのでタイムラインのページに移動する
 if (token !== null) {
-    location.href = './home.html';
+  location.href = './home.html';
 }

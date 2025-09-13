@@ -1,33 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial SNS</title>
+    <script src="/js/signup.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial SNS</title>
-  <script src="/js/signup.js"></script>
-</head>
-
-<body>
-  <h1>サインアップ</h1>
-  <main>
+  <body>
+    <h1>サインアップ</h1>
+    <main>
+      <div>
+        <div>ユーザー名</div>
+        <input id="input_name" type="text" required />
+      </div>
+      <div>
+        <div>email</div>
+        <input id="input_email" type="email" required />
+      </div>
+      <div>
+        <div>パスワード</div>
+        <input id="input_pass" type="password" required />
+      </div>
+    </main>
+    <input type="submit" value="サインアップ" onclick="submit()" />
     <div>
-      <div>ユーザー名</div>
-      <input id="input_name" type="text" required />
+      <a href="/">戻る</a>
     </div>
-    <div>
-      <div>email</div>
-      <input id="input_email" type="email" required />
-    </div>
-    <div>
-      <div>パスワード</div>
-      <input id="input_pass" type="password" required />
-    </div>
-  </main>
-  <input type="submit" value="サインアップ" onclick="submit()">
-  <div>
-    <a href="/">戻る</a>
-  </div>
-</body>
-
+  </body>
 </html>
