@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.orm.session import Session
-from schemas import UserSchema, ContentSchema
-from db import User, Content
+from schemas import UserSchema
+from db import User
 from utils import get_password_hash
 
 
@@ -40,13 +40,13 @@ def get_user_by_id(db: Session, user_id: str) -> UserSchema:
 
 
 ## 作る関数1
-# fetch_contents関数で使用したい。
+# contentsを全件取得する関数を作りたい。(fetch_contents関数で使いたい)
 # 1. db.queryでcontentsのテーブルにあるデータを全て取ってくる
 # 2. 取ってきた1つ1つのデータをmodel_validateを使って、APIが返す用のschemaに変換する
 # 3. 変換したデータのリストをreturnする
 
 ## 作る関数2
-# post_content関数で使用したい．
+# contentを作成する関数を作りたい。(post_content関数で使用したい)
 # 1. 引数から、contentsテーブルにcontentを作るために必要なデータを全て受け取る
 #    hint: db.pyの定義がテーブルの定義。defaultのないColumnのデータはcontentを作るために必要になる
 # 2. 引数の値を使い、DBで扱う方のContentのクラスを組み立て、DBにcommit, refreshする
