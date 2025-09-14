@@ -1,11 +1,14 @@
 # FastAPI をおしえるの会 リポジトリ
 
+## 環境構築
+
+1. バージョン管理ツール `uv` を導入する (https://docs.astral.sh/uv/#installation)
+2. `uv sync` で python に必要なライブラリをダウンロード
+
 ## 起動方法
 
-1. (初回のみ) バージョン管理ツール `uv` を導入する (https://docs.astral.sh/uv/#installation)
-2. (初回のみ) `uv sync` で python に必要なライブラリをダウンロード
-3. `uv run uvicorn main:app --reload` で起動
-4. `http://localhost:8000` にアクセス
+1. `uv run uvicorn main:app --reload` で起動
+2. `http://localhost:8000` にアクセス
 
 ## やること
 
