@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.orm.session import Session
-from schemas import UserSchema
-from db import User
+from schemas import UserSchema, ContentSchema
+from db import User, Content
 from utils import get_password_hash
 
 
@@ -44,6 +44,10 @@ def get_user_by_id(db: Session, user_id: str) -> UserSchema:
 # 1. db.queryでcontentsのテーブルにあるデータを全て取ってくる
 # 2. 取ってきた1つ1つのデータをmodel_validateを使って、APIが返す用のschemaに変換する
 # 3. 変換したデータのリストをreturnする
+def get_contents(db: Session) -> ContentSchema:
+    contents_orm = db.query(Content).all()
+    contents = list(map(ContentSchema.model_validate, contents_orm))
+    return contents
 
 ## 作る関数2
 # contentを作成する関数を作りたい。(post_content関数で使用したい)
@@ -52,3 +56,14 @@ def get_user_by_id(db: Session, user_id: str) -> UserSchema:
 # 2. 引数の値を使い、DBで扱う方のContentのクラスを組み立て、DBにcommit, refreshする
 #    hint: cruds.pyのadd_userで、Userクラスで同じようなことをしているので、参考にしてみよう
 # 3. model_validateでAPIが返す用のschemaに変換し、returnする
+def add_content(db: Session, content_str: str, user_id: str) -> ContentSchema:
+    if len(content_str) <= 0:
+        raise HTTPException(status_code=400, detail="content is empty")
+
+    content_orm = Content(content=content_str, user_id=user_id)
+
+    db.add(content_orm)
+    db.commit()
+    db.refresh(content_orm)
+    content = ContentSchema.model_validate(content_orm)
+    return content
