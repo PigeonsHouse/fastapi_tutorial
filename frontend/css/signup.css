@@ -66,6 +66,10 @@ input[type="submit"] {
     cursor: pointer;
     width: 100%;
     margin-bottom: 80px;
+    transition: 0.2s;
+    &:hover {
+        background-color: light-dark(var(--black-hover), var(--white-hover));
+    }
 }
 a {
     color: light-dark(var(--light-blue), var(--light-blue));

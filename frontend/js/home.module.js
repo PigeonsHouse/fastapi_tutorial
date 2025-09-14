@@ -37,15 +37,7 @@ const timeline_response = await fetch('/api/contents', {
 if (timeline_response.status != 200) {
   alert('getting content is failed');
 } else {
-  // const timelines = await timeline_response.json();
-
-  const timelines = [
-    {
-      user: {name: 'testuser1'},
-      content: 'これはテスト投稿1です',
-      created_at: '2024-06-01 12:00:00',
-    }
-  ]
+  const timelines = await timeline_response.json();
 
   timelines.map((content) =>
     document
